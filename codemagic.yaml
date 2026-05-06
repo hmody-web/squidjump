@@ -18,8 +18,8 @@ workflows:
     scripts:
       - flutter pub get
 
-      # 🔥 build بدون توقيع
-      - flutter build ios --simulator --release
+      # 🔥 build للـ simulator (بدون release)
+      - flutter build ios --simulator
 
       # 🔥 تحويل الى ipa
       - name: Create IPA
