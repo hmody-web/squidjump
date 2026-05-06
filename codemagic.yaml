@@ -17,7 +17,18 @@ workflows:
 
     scripts:
       - flutter pub get
+
+      - name: Set dummy team
+        script: |
+          sed -i '' 's/DEVELOPMENT_TEAM = .*/DEVELOPMENT_TEAM = ABCDE12345;/g' ios/Runner.xcodeproj/project.pbxproj
+
       - flutter build ios --release --no-codesign
 
+      - name: Create IPA
+        script: |
+          mkdir -p Payload
+          cp -r build/ios/iphoneos/Runner.app Payload/
+          zip -r app.ipa Payload
+
     artifacts:
-      - build/ios/iphoneos/*.app
+      - app.ipa
